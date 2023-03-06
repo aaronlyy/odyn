@@ -10,6 +10,10 @@ import morgan from 'morgan';
 // create the app
 const app = express();
 
+// middleware
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
 // 3rd party middleware
 app.use(morgan('combined'));
 app.use(helmet());

@@ -4,3 +4,4 @@
 - express als api framework installiert
 - helmet um http header zu sichern
 - cors um cross origin requests zu erlauben (bzw zu verbieten)
+- cookie-parser installiert um cookies auszulesen

@@ -6,5 +6,5 @@ export const controllerAuthLogin = (req, res) => {
         secure: true,
         sameSite: 'none'
     });
-    return res.status(200).json(response(true))
+    return res.status(201).json(response(true))
 }

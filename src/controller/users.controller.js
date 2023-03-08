@@ -1,5 +1,10 @@
+import { response } from "../util/response.js";
+
 export const controllerUsersGetMe = (req, res) => {
-    return res.status(200).send();
+    return res.status(200).json(response(true, {
+        name: "aaron",
+        role: "admin"
+    }));
 }
 
 export const controllerUsersGetAll = (req, res) => {

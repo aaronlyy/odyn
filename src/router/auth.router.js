@@ -4,6 +4,6 @@ import { controllerAuthLogin } from '../controller/auth.controller.js';
 
 const routerAuth = express.Router();
 
-routerAuth.get('/login', controllerAuthLogin);
+routerAuth.post('/login', controllerAuthLogin);
 
 export default routerAuth;

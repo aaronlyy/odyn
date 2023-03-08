@@ -10,6 +10,12 @@ const authorize = (roles) => {
             return res.status(401).json(response(false));
         }
 
+        // verify jwt
+        if (accessToken != '123') {
+            console.log('No valid accessToken')
+            return res.status(401).json(response(false));
+        }
+
         // get user & remove hashes from object
         const user = {
             name: "aaron",

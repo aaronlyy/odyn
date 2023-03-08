@@ -20,7 +20,11 @@ export const controllerAuthLogin = (req, res) => {
 }
 
 export const controllerAuthLogout = (req, res) => {
-    res.clearCookie('accessToken');
+    res.clearCookie('accessToken', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+    });
 
     return res.status(200).json(response(true))
 }

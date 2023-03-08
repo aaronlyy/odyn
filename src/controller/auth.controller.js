@@ -18,3 +18,9 @@ export const controllerAuthLogin = (req, res) => {
 
     return res.status(201).json(response(true))
 }
+
+export const controllerAuthLogout = (req, res) => {
+    res.clearCookie('accessToken');
+
+    return res.status(200).json(response(true))
+}

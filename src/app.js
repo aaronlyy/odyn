@@ -23,7 +23,10 @@ app.use(cookieParser('supersecrettoken'));
 // 3rd party middleware
 app.use(morgan('combined'));
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: 'http://127.0.0.1:5173',
+    credentials: true
+}));
 
 // own middlware
 app.use(methods(['GET', 'POST', 'PATCH', 'DELETE']));

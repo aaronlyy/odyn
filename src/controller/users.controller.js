@@ -1,3 +1,7 @@
+export const controllerUsersGetMe = (req, res) => {
+    return res.status(200).send();
+}
+
 export const controllerUsersGetAll = (req, res) => {
     return res.status(200).send();
 }

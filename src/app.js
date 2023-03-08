@@ -5,9 +5,10 @@ import cors from 'cors'; // allow cross origin requests
 import helmet from 'helmet'; // secure http headers
 import cookieParser from 'cookie-parser'; // get jwt from httpOnly cookies
 import morgan from 'morgan'; // logging
-import { methods } from './middleware/methods.js'; // setting allowed methods
+import methods from './middleware/methods.middleware.js'; // setting allowed methods
 
 // router imports
+import routerAuth from './router/auth.router.js';
 import routerStatus from './router/status.router.js';
 import routerUsers from './router/users.router.js';
 
@@ -25,9 +26,10 @@ app.use(helmet());
 app.use(cors());
 
 // own middlware
-app.use(methods());
+app.use(methods(['GET', 'POST', 'PATCH', 'DELETE']));
 
 // routes
+app.use('/auth', routerAuth);
 app.use('/status', routerStatus);
 app.use('/users', routerUsers);
 // app.use('/customers')

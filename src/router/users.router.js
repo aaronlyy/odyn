@@ -11,7 +11,7 @@ import {
 
 const routerUsers = express.Router();
 
-routerUsers.all('/me', authorize('user'), controllerUsersGetMe) // get own user info
+routerUsers.all('/me', authorize(['user', 'admin']), controllerUsersGetMe) // get own user info
 routerUsers.get('/', authorize('admin'), controllerUsersGetAll) // get all users
 routerUsers.get('/:uid', authorize('admin'), controllerUsersGetOne) // get a specific user
 routerUsers.post('/', authorize('admin'), controllerUsersPostOne) // create a new user

@@ -10,7 +10,7 @@ const authorize = (roles) => {
             return res.status(401).json(response(false));
         }
 
-        // get user
+        // get user & remove hashes from object
         const user = {
             name: "aaron",
             role: "admin"

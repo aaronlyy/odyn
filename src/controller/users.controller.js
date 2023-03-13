@@ -29,12 +29,16 @@ export const controllerUsersPostOne = async (req, res) => {
         return res.status(400).json(response(false, 'Username already exists'));
     }
 
+    // get latest uid
+    const latestUsers = await User.find().sort({_id: -1}).limit(1);
+    const uid = latestUsers.length > 0 ? latestUsers[0].uid + 1 : 0;
+
     // hash pw
     const hash = await bcrypt.hash(password, 10);
 
-    // save user
+    // // save user
     const user = new User({
-        uid: 0,
+        uid,
         username,
         role: 'user',
         hash
@@ -101,6 +105,14 @@ export const controllerUsersPatchOne = async (req, res) => {
     return res.status(200).send();
 }
 
-export const controllerUsersDeleteOne = (req, res) => {
-    return res.status(200).send();
+export const controllerUsersDeleteOne = async (req, res) => {
+    // check if uid exists
+    if (!await User.exists({uid})) {
+        return res.status(404).json(response(false, `User with uid = ${uid} could not be found`));
+    }
+
+    // delete user
+    await User.deleteOne({uid});
+
+    return res.status(200).json(response(true, 'User deleted'));
 }

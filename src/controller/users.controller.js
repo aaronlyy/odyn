@@ -4,7 +4,7 @@ import { response } from "../util/response.js";
 import User from "../models/user.model.js";
 
 export const controllerUsersGetMe = (req, res) => {
-    return res.status(200).json(response(true, req.user));
+    return res.status(200).json(response(true, 'User read', req.user));
 }
 
 export const controllerUsersGetAll = async (req, res) => {

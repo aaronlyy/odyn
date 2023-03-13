@@ -7,12 +7,42 @@ export const controllerUsersGetMe = (req, res) => {
     return res.status(200).json(response(true, req.user));
 }
 
-export const controllerUsersGetAll = (req, res) => {
-    return res.status(200).send();
+export const controllerUsersGetAll = async (req, res) => {
+    // get users
+    const users = await User.find();
+
+    if (users.length === 0) {
+        return res.status(404).json(response(false, 'No users found'));
+    }
+    
+    // remove hashes
+    const usersNoHash = []
+    users.map((user) => {
+        usersNoHash.push({
+            username: user.username,
+            role: user.role
+        })
+    })
+
+    return res.status(200).json(response(true, 'Users read', usersNoHash));
 }
 
-export const controllerUsersGetOne = (req, res) => {
-    return res.status(200).send();
+export const controllerUsersGetOne = async (req, res) => {
+    // get uid
+    const uid = req.params.uid;
+
+    // check if uid exists
+    if (!await User.exists({uid})) {
+        return res.status(404).json(response(false, `User with uid = ${uid} could not be found`));
+    }
+
+    // get user
+    const user = await User.findOne({uid});
+
+    return res.status(200).json(response(true, 'User read', {
+        username: user.username,
+        role: user.role
+    }));
 }
 
 export const controllerUsersPostOne = async (req, res) => {

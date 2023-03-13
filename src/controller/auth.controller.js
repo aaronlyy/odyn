@@ -26,5 +26,5 @@ export const controllerAuthLogout = (req, res) => {
         sameSite: 'none'
     });
 
-    return res.status(200).json(response(true))
+    return res.status(200).json(response(true, 'Authenticated'))
 }

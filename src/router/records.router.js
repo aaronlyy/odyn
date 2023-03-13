@@ -6,7 +6,7 @@ import {
     controllerRecordsDeleteOne,
     controllerRecordsGetOne,
     controllerRecordsPatchOne
-} from '../controller/records.controller';
+} from '../controller/records.controller.js';
 
 const routerRecords = express.Router();
 

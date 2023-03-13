@@ -1,5 +1,9 @@
 import express from 'express';
 
+// env
+import dotenv from 'dotenv'
+dotenv.config();
+
 // security & logging imports
 import cors from 'cors'; // allow cross origin requests
 import helmet from 'helmet'; // secure http headers
@@ -12,6 +16,7 @@ import routerAuth from './router/auth.router.js';
 import routerStatus from './router/status.router.js';
 import routerUsers from './router/users.router.js';
 import routerRecords from './router/records.router.js';
+import mongoose from 'mongoose';
 
 // create the app
 const app = express();
@@ -41,10 +46,13 @@ app.use('/records', routerRecords);
 // disable stuff
 app.disable('x-powered-by');
 
+// connect to database
+mongoose.connect(process.env.DB_URI);
+const connection = mongoose.connection;
+connection.on('error', () => console.error.bind(console, 'Connection Error'));
+connection.once('open', () => console.log('Database connected'));
+
 // start app
-app.listen(4000, () => {
-    console.log(`App listening on port ${4000}`);
+app.listen(process.env.PORT, () => {
+    console.log(`App listening on port ${process.env.PORT}`);
 })
-
-
-// database connection

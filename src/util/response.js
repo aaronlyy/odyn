@@ -1,6 +1,7 @@
-export const response = (success, data = {}) => {
+export const response = (success, message, data = {}) => {
     return {
         success,
+        message,
         data
     }
 }

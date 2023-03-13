@@ -9,13 +9,13 @@ import {
     controllerUsersPatchOne
 } from "../controller/users.controller.js";
 
-const routerUsers = express.Router();
+const routerUsers = express.Router({mergeParams: true});
 
 routerUsers.get('/me', authorize(['user', 'admin']), controllerUsersGetMe) // get own user info
 routerUsers.get('/', authorize('admin'), controllerUsersGetAll) // get all users
 routerUsers.get('/:uid', authorize('admin'), controllerUsersGetOne) // get a specific user
 routerUsers.post('/', authorize('admin'), controllerUsersPostOne) // create a new user
-routerUsers.patch('/users/:uid', authorize('admin'), controllerUsersPatchOne) // modify a user
-routerUsers.delete('/users/:uid'), authorize('admin'), controllerUsersDeleteOne // delete a user
+routerUsers.patch('/:uid', authorize('admin'), controllerUsersPatchOne) // modify a user
+routerUsers.delete('/:uid'), authorize('admin'), controllerUsersDeleteOne // delete a user
 
 export default routerUsers;

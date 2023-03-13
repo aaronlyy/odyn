@@ -32,7 +32,7 @@ export const controllerUsersPostOne = async (req, res) => {
     // hash pw
     const hash = await bcrypt.hash(password, 10);
 
-    // safe user
+    // save user
     const user = new User({
         uid: 0,
         username,

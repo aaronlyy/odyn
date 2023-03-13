@@ -11,6 +11,7 @@ import methods from './middleware/methods.middleware.js'; // setting allowed met
 import routerAuth from './router/auth.router.js';
 import routerStatus from './router/status.router.js';
 import routerUsers from './router/users.router.js';
+import routerRecords from './router/records.router.js';
 
 // create the app
 const app = express();
@@ -35,7 +36,7 @@ app.use(methods(['GET', 'POST', 'PATCH', 'DELETE']));
 app.use('/auth', routerAuth);
 app.use('/status', routerStatus);
 app.use('/users', routerUsers);
-// app.use('/customers')
+app.use('/records', routerRecords);
 
 // disable stuff
 app.disable('x-powered-by');
